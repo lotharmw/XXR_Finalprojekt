@@ -1,20 +1,36 @@
 import express from "express";
-import Connection from "./db/dbConncection.js";
-import exampleRouter from "./routes/exampleRouter.js";
 import cors from "cors";
+import multer from "multer";
+import helmet from "helmet";
+import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
+import Connection from "./db/dbConnection.js";
+import authRouter from "./routes/authRouter.js";
+import userRouter from "./routes/userRouter.js";
+import postRouter from "./routes/postRouter.js";
+import errorHandler from "./middleware/errorHandler.js";
 
+// CONFIGURATIONS
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
-Connection();
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-);
-
+app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(cors());
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 const port = process.env.PORT || 8000;
+Connection();
 
-app.use("/", exampleRouter);
+// ROUTES
+app.use("/auth", authRouter);
+app.use("/users", userRouter);
+app.use("/posts", postRouter);
+
+// ERROR HANDLER
+app.use(errorHandler);
 
 app.listen(port, () =>
   console.log("Server is running on http://localhost:" + port)
