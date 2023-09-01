@@ -5,7 +5,7 @@ import power from "../assets/power-button-svgrepo-com.svg";
 
 function Header({ user }) {
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "winter"
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "lemonade"
   );
 
   // update state on toggle
@@ -13,7 +13,7 @@ function Header({ user }) {
     if (e.target.checked) {
       setTheme("night");
     } else {
-      setTheme("winter");
+      setTheme("lemonade");
     }
   };
 
@@ -95,7 +95,7 @@ function Header({ user }) {
             type="checkbox"
             onChange={handleToggle}
             // show toggle image based on localstorage theme
-            checked={theme === "winter" ? false : true}
+            checked={theme === "lemonade" ? false : true}
           />
 
           {/* sun icon */}

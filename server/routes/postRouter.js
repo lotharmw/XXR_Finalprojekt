@@ -17,6 +17,6 @@ postRouter.route("/").get(verifyToken, getFeedPost);
 postRouter.route("/:userId/posts").get(verifyToken, getUserPost);
 
 // UPDATE
-postRouter.route("/:userId/like").get(verifyToken, likePost);
+postRouter.route("/like/:id").patch(verifyToken, likePost);
 
 export default postRouter;

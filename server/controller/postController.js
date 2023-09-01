@@ -78,8 +78,11 @@ export const getUserPost = asyncHandler(async (req, res, next) => {
 export const likePost = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { userId } = req.body;
+  console.log(req.params);
+  console.log(req.body);
 
-  const post = await Post.findbyId(id);
+  const post = await Post.findById(id);
+  console.log(post);
   const isLiked = post.likes.get(userId);
 
   if (isLiked) {
@@ -94,8 +97,12 @@ export const likePost = asyncHandler(async (req, res, next) => {
     { new: true }
   );
 
-  res.status(200).json(updatedPost);
+  if (!updatedPost)
+    throw new ErrorResponse(`Can not find Posts of ${userId}`, 404);
 
-  if (!newPost) throw new ErrorResponse(`Can not find Posts of ${userId}`, 404);
+  const allPost = await Post.find();
+
+  return res.status(200).json(allPost);
+
   next();
 });

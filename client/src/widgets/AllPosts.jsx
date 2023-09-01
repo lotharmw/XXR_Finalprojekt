@@ -30,22 +30,25 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
     fetchData();
   }, [token]);
 
-  const handleLike = async (e) => {
+  const handleLike = async (e, post) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8000/${user._id}/like`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: { userId: likeRef.current.name },
-      });
+      const response = await fetch(
+        `http://localhost:8000/posts/like/${post._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: likeRef.current.name }),
+        }
+      );
       if (!response.ok)
         throw new Error(`The fetch failed with a status of ${response.status}`);
       const responseData = await response.json();
       const data = responseData; // wich data?;
-      console.log(data); //[use, setUse] = useState(wich start?)
+      setAllPosts(data); //[use, setUse] = useState(wich start?)
     } catch (error) {
       console.log(error);
     }
@@ -87,9 +90,9 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
               <div className="flex flex-row items-center gap-2">
                 <button ref={likeRef} name={user._id}>
                   {user._id in post.likes ? (
-                    <AiFillHeart onClick={handleLike} />
+                    <AiFillHeart onClick={(e) => handleLike(e, post)} />
                   ) : (
-                    <AiOutlineHeart onClick={handleLike} />
+                    <AiOutlineHeart onClick={(e) => handleLike(e, post)} />
                   )}
                 </button>
                 <span>{Object.keys(post.likes).length}</span>
