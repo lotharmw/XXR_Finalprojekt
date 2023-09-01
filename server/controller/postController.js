@@ -2,17 +2,42 @@ import User from "../models/User.js";
 import Post from "../models/Post.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
+import Multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
+
+export const storage = new Multer.memoryStorage();
+export const upload = Multer({
+  storage,
+});
+
+export async function handleUpload(file) {
+  const res = await cloudinary.uploader.upload(file, {
+    resource_type: "auto",
+  });
+  return res;
+}
 
 // CREATE
 export const createPost = asyncHandler(async (req, res, next) => {
-  const { userId, description } = req.body;
+  const { userId, picturePath, description } = req.body;
   const user = await User.findById(userId);
+  const b64 = Buffer.from(req.file.buffer).toString("base64");
+  let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+  const cldRes = await handleUpload(dataURI);
+  const pic = cldRes.url;
   const newPost = new Post({
     userId,
     first_name: user.first_name,
     last_name: user.last_name,
     location: user.location,
     description,
+    picturePath: pic,
     userPicturePath: user.picturePath,
     likes: {},
     comments: [],
@@ -32,9 +57,9 @@ export const createPost = asyncHandler(async (req, res, next) => {
 export const getFeedPost = asyncHandler(async (req, res, next) => {
   const post = await Post.find();
 
+  if (!post) throw new ErrorResponse(`Can not find Posts`, 404);
   res.status(200).json(post);
 
-  if (!post) throw new ErrorResponse(`Can not find Posts`, 404);
   next();
 });
 
