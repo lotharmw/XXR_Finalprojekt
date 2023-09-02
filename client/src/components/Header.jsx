@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import power from "../assets/power-button-svgrepo-com.svg";
+import logo from "../assets/logo.png";
 
 function Header({ user }) {
   const [theme, setTheme] = useState(
@@ -70,7 +71,9 @@ function Header({ user }) {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a className="btn btn-ghost normal-case text-xl">
+          <img className="w-24" src={logo} alt="" />
+        </a>
       </div>
       <div className="navbar-end">
         {user && (
@@ -78,7 +81,7 @@ function Header({ user }) {
             <li>
               <details>
                 <summary>{user.first_name}</summary>
-                <ul className="bg-base-200 left-1/2 translate-x-[-50%] w-max">
+                <ul className="bg-base-200 left-1/2 translate-x-[-50%] w-max z-10">
                   <li>
                     <a onClick={handleLogOut}>
                       <img src={power} alt="" />

@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import ProfilePage from "./components/ProfilePage";
-import HomeScreen from "./components/HomeScreen";
+import XXRHome from "./components/XXRHome";
 
 function App() {
   const navigate = useNavigate();
@@ -138,7 +138,7 @@ function App() {
           path="/profile/:id"
           element={token ? <ProfilePage /> : <Navigate to="/" />}
         />
-        <Route path="/home" element={<HomeScreen />} />
+        <Route path="/home" element={<XXRHome />} />
       </Routes>
     </div>
   );

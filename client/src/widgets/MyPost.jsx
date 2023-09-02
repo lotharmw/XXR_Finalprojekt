@@ -14,7 +14,6 @@ function MyPost({ user, token }) {
     description: "",
     picturePath: "",
   });
-  // const [isPost, setIsPost] = useState();
   const [allPosts, setAllPosts] = useState([]);
 
   const handleDescriptionChange = (e) => {

@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { AiOutlineUserAdd, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import defaultUser from "../assets/default-user.svg";
 
 function AllPosts({ token, user, allPosts, setAllPosts }) {
-  const [like, isLike] = useState();
   const likeRef = useRef();
   useEffect(() => {
     const fetchData = async () => {
