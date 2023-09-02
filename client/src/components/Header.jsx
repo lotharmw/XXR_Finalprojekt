@@ -1,23 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import power from "../assets/power-button-svgrepo-com.svg";
 import logo from "../assets/logo.png";
 
-function Header({ user }) {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "lemonade"
-  );
-
-  // update state on toggle
-  const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("night");
-    } else {
-      setTheme("lemonade");
-    }
-  };
-
+function Header({ user, handleToggle, theme }) {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -26,13 +12,6 @@ function Header({ user }) {
     navigate("/");
     location.reload();
   };
-  // set theme state in localstorage on mount & also update localstorage on state change
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    // add custom data-theme attribute to html tag required to update theme using DaisyUI
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
 
   return (
     <div className="navbar bg-base-100">

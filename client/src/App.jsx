@@ -8,6 +8,27 @@ import ProfilePage from "./components/ProfilePage";
 import XXRHome from "./components/XXRHome";
 
 function App() {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "lemonade"
+  );
+
+  // update state on toggle
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("night");
+    } else {
+      setTheme("lemonade");
+    }
+  };
+
+  // set theme state in localstorage on mount & also update localstorage on state change
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    // add custom data-theme attribute to html tag required to update theme using DaisyUI
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
   const navigate = useNavigate();
 
   const [showRegister, setShowRegister] = useState(false);
@@ -114,7 +135,7 @@ function App() {
 
   return (
     <div className="bg-base-200 min-h-screen">
-      <Header user={user} />
+      <Header user={user} handleToggle={handleToggle} theme={theme} />
       <Routes>
         {token ? (
           <Route path="/" element={<Home user={user} token={token} />} />
@@ -138,7 +159,7 @@ function App() {
           path="/profile/:id"
           element={token ? <ProfilePage /> : <Navigate to="/" />}
         />
-        <Route path="/home" element={<XXRHome />} />
+        <Route path="/home" element={<XXRHome theme={theme} />} />
       </Routes>
     </div>
   );
