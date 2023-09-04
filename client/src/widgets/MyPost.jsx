@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import defaultUser from "../assets/default-user.svg";
 import Dropzone from "react-dropzone";
 import { BsImage } from "react-icons/bs";
@@ -12,7 +12,6 @@ function MyPost({ user, token }) {
   const [post, setPost] = useState({
     userId: user._id,
     description: "",
-    picturePath: "",
   });
   const [allPosts, setAllPosts] = useState([]);
 
@@ -28,7 +27,6 @@ function MyPost({ user, token }) {
 
     const formData = new FormData();
     formData.append("picture", file);
-    formData.append("picturePath", post.picturePath);
     formData.append("description", post.description);
     formData.append("userId", post.userId);
 
@@ -56,10 +54,6 @@ function MyPost({ user, token }) {
       picturePath: "",
     });
   };
-
-  useEffect(() => {
-    allPosts ? (post.picturePath = allPosts.secure_url) : null;
-  }, [post, allPosts]);
 
   return (
     <>

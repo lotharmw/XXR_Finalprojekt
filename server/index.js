@@ -9,6 +9,7 @@ import Connection from "./db/dbConnection.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
 import postRouter from "./routes/postRouter.js";
+import xploreRouter from "./routes/xploreRouter.js";
 import errorHandler from "./middleware/errorHandler.js";
 
 // CONFIGURATIONS
@@ -28,6 +29,7 @@ Connection();
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
+app.use("/xplore", xploreRouter);
 
 // ERROR HANDLER
 app.use(errorHandler);

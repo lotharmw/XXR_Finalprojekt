@@ -78,11 +78,8 @@ export const getUserPost = asyncHandler(async (req, res, next) => {
 export const likePost = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { userId } = req.body;
-  console.log(req.params);
-  console.log(req.body);
 
   const post = await Post.findById(id);
-  console.log(post);
   const isLiked = post.likes.get(userId);
 
   if (isLiked) {

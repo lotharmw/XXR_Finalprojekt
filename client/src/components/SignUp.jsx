@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import Dropzone from "react-dropzone";
+import { CiCircleRemove } from "react-icons/ci";
 
 function SignUp({
   showRegister,
@@ -8,6 +10,8 @@ function SignUp({
   handleRegisterChange,
   handleLoginChange,
   handleSubmit,
+  file,
+  setFile,
 }) {
   return (
     <div className="hero calc-screen bg-base-200">
@@ -58,6 +62,42 @@ function SignUp({
                   />
                 </div>
                 <div className="form-control">
+                  <label htmlFor="" className="label">
+                    <span className="label-text">Profile Image</span>
+                  </label>{" "}
+                  <Dropzone
+                    acceptedFiles=".jpg,.jpeg,.png"
+                    multiple={false}
+                    onDrop={(acceptedFiles) => {
+                      setFile(acceptedFiles[0]);
+                    }}
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      <section>
+                        {!file ? (
+                          <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            <div className=" p-4 w-full border-dotted border-2 cursor-pointer">
+                              Drag &apos;n&apos; drop some files here, or click
+                              to select files
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="w-full p-4 border-dotted border-2 flex flex-row justify-between items-center">
+                            <div>{file.path}</div>
+                            <CiCircleRemove
+                              className="cursor-pointer w-8 h-8"
+                              onClick={() => {
+                                setFile(false);
+                              }}
+                            />
+                          </div>
+                        )}
+                      </section>
+                    )}
+                  </Dropzone>
+                </div>
+                <div className="form-control">
                   <label className="label">
                     <span className="label-text">Occupation</span>
                   </label>
@@ -75,7 +115,7 @@ function SignUp({
                     <span className="label-text">Email</span>
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     placeholder="email"
                     name="email"
                     className="input input-bordered"

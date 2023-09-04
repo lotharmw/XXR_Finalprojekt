@@ -6,13 +6,14 @@ import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import ProfilePage from "./components/ProfilePage";
 import XXRHome from "./components/XXRHome";
+import Xplore from "./components/Xplore";
 
 function App() {
+  // THEME TOGGLE LIGHT/DARK MODE - START
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "lemonade"
   );
 
-  // update state on toggle
   const handleToggle = (e) => {
     if (e.target.checked) {
       setTheme("night");
@@ -21,14 +22,14 @@ function App() {
     }
   };
 
-  // set theme state in localstorage on mount & also update localstorage on state change
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
-    // add custom data-theme attribute to html tag required to update theme using DaisyUI
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+  // THEME TOGGLE LIGHT/DARK MODE - END
 
+  // LOGIN/REGISTRATION - START
   const navigate = useNavigate();
 
   const [showRegister, setShowRegister] = useState(false);
@@ -47,6 +48,7 @@ function App() {
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [file, setFile] = useState();
 
   const [token, setToken] = useState();
   const [user, setUser] = useState();
@@ -55,12 +57,21 @@ function App() {
     if (submitting) {
       if (showRegister) {
         // Send formData to backend here
+        const formData = new FormData();
+        formData.append("picture", file);
+        formData.append("first_name", registerData.first_name);
+        formData.append("last_name", registerData.last_name);
+        formData.append("location", registerData.location);
+        formData.append("occupation", registerData.occupation);
+        formData.append("email", registerData.email);
+        formData.append("password", registerData.password);
+
         fetch("http://localhost:8000/auth/register", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(registerData),
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
+          body: formData,
         })
           .then((res) => {
             setSubmitting(false);
@@ -106,7 +117,7 @@ function App() {
           });
       }
     }
-  }, [showRegister, loginData, registerData, submitting, navigate]);
+  }, [file, showRegister, loginData, registerData, submitting, navigate]);
 
   useEffect(() => {
     const isToken = localStorage.getItem("token");
@@ -132,6 +143,7 @@ function App() {
     e.preventDefault();
     setSubmitting(true);
   };
+  // LOGIN/REGISTRATION - END
 
   return (
     <div className="bg-base-200 min-h-screen">
@@ -151,6 +163,8 @@ function App() {
                 handleRegisterChange={handleRegisterChange}
                 handleLoginChange={handleLoginChange}
                 handleSubmit={handleSubmit}
+                file={file}
+                setFile={setFile}
               />
             }
           />
@@ -160,6 +174,10 @@ function App() {
           element={token ? <ProfilePage /> : <Navigate to="/" />}
         />
         <Route path="/home" element={<XXRHome theme={theme} />} />
+        <Route
+          path="/xplore"
+          element={<Xplore theme={theme} user={user} token={token} />}
+        />
       </Routes>
     </div>
   );

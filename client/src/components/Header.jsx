@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import power from "../assets/power-button-svgrepo-com.svg";
-import logo from "../assets/logo.png";
+import logoBlack from "../assets/logo-black.png";
+import logoWhite from "../assets/logo-white.png";
 
 function Header({ user, handleToggle, theme }) {
   const navigate = useNavigate();
@@ -51,7 +52,11 @@ function Header({ user, handleToggle, theme }) {
       </div>
       <div className="navbar-center">
         <a className="btn btn-ghost normal-case text-xl">
-          <img className="w-24" src={logo} alt="" />
+          {theme == "night" ? (
+            <img className="w-24" src={logoWhite} alt="" />
+          ) : (
+            <img className="w-24" src={logoBlack} alt="" />
+          )}
         </a>
       </div>
       <div className="navbar-end">
