@@ -67,7 +67,7 @@ function App() {
         formData.append("email", registerData.email);
         formData.append("password", registerData.password);
 
-        fetch("http://localhost:8000/auth/register", {
+        fetch(`${import.meta.env.VITE_APP_XXR}/auth/register`, {
           method: "POST",
           // headers: {
           //   "Content-Type": "application/json",
@@ -89,7 +89,7 @@ function App() {
           });
       } else {
         // Send formData to backend here
-        fetch("http://localhost:8000/auth/login", {
+        fetch(`${import.meta.env.VITE_APP_XXR}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

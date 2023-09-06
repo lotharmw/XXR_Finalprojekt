@@ -10,7 +10,7 @@ function MyMemory({ user }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/posts/${user._id}/posts`
+          `${import.meta.env.VITE_APP_XXR}/posts/${user._id}/posts`
         );
         if (!response.ok)
           throw new Error(

@@ -13,7 +13,7 @@ function Event({ user, token, allEvents, setAllEvents }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/xplore");
+        const response = await fetch(`${import.meta.env.VITE_APP_XXR}/xplore`);
         if (!response.ok)
           throw new Error(
             `The fetch failed with a status of ${response.status}`
@@ -32,7 +32,7 @@ function Event({ user, token, allEvents, setAllEvents }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/xplore/like/${event._id}`,
+        `${import.meta.env.VITE_APP_XXR}/xplore/like/${event._id}`,
         {
           method: "PATCH",
           headers: {

@@ -31,7 +31,7 @@ function MyPost({ user, token }) {
     formData.append("userId", post.userId);
 
     try {
-      const response = await fetch("http://localhost:8000/posts", {
+      const response = await fetch(`${import.meta.env.VITE_APP_XXR}/posts`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
