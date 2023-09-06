@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 
-import fish from "../assets/fish.svg";
-import defaultUser from "../assets/default-user.svg";
+import fish from "../../public/img/fish.svg";
+import defaultUser from "../../public/img/default-user.svg";
 import { BsImage, BsSpotify } from "react-icons/bs";
 import { BiLogoSoundcloud } from "react-icons/bi";
 import { AiFillYoutube } from "react-icons/ai";

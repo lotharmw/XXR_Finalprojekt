@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useNavigate, NavLink } from "react-router-dom";
-import power from "../assets/power-button-svgrepo-com.svg";
-import logoBlack from "../assets/logo-black.png";
-import logoWhite from "../assets/logo-white.png";
+import power from "../../public/img/power-button-svgrepo-com.svg";
+import logoBlack from "../../public/img/logo-black.png";
+import logoWhite from "../../public/img/logo-white.png";
 
 function Header({ user, handleToggle, theme }) {
   const navigate = useNavigate();

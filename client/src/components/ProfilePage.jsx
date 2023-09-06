@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import defaultUser from "../assets/default-user.svg";
+import defaultUser from "../../public/img/default-user.svg";
 import { AiOutlineHome, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { MdWorkOutline } from "react-icons/md";
 import { MdAlternateEmail } from "react-icons/md";

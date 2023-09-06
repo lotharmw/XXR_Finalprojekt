@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import defaultUser from "../assets/default-user.svg";
+import defaultUser from "../../public/img/default-user.svg";
 import Dropzone from "react-dropzone";
 import { BsImage } from "react-icons/bs";
 import { CiCircleRemove } from "react-icons/ci";

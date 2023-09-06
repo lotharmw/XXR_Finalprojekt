@@ -7,7 +7,7 @@ import Event from "../widgets/Event";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { AiOutlineLogin } from "react-icons/ai";
 import { CiCircleRemove } from "react-icons/ci";
-import snake from "../assets/snake.svg";
+import snake from "../../public/img/snake.svg";
 
 function Xplore({ theme, user, token }) {
   const [file, setFile] = useState();

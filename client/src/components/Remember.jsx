@@ -2,8 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import { AiOutlineLogin } from "react-icons/ai";
 import MyPost from "../widgets/MyPost";
-import dragon from "../assets/dragon.svg";
-import vogelRe from "../assets/vogelRe.svg";
+import dragon from "../../public/img/dragon.svg";
+import vogelRe from "../../public/img/vogelRe.svg";
 
 function Remember({ user, token, theme }) {
   const navigate = useNavigate();
