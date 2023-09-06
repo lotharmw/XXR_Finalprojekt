@@ -15,7 +15,9 @@ function Sets({ defaultUser, user, token, allSetPosts, setAllSetPosts }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/xperience");
+        const response = await fetch(
+          `${import.meta.env.VITE_APP_XXR}/xperience`
+        );
         if (!response.ok)
           throw new Error(
             `The fetch failed with a status of ${response.status}`
@@ -34,7 +36,7 @@ function Sets({ defaultUser, user, token, allSetPosts, setAllSetPosts }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/xperience/like/${set._id}`,
+        `${import.meta.env.VITE_APP_XXR}/xperience/like/${set._id}`,
         {
           method: "PATCH",
           headers: {
@@ -61,7 +63,7 @@ function Sets({ defaultUser, user, token, allSetPosts, setAllSetPosts }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/users/${user._id}/${set.userId}`,
+        `${import.meta.env.VITE_APP_XXR}/users/${user._id}/${set.userId}`,
         {
           method: "PATCH",
           headers: {

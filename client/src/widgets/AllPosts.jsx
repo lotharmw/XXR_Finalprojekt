@@ -13,7 +13,7 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/posts", {
+        const response = await fetch(`${import.meta.env.VITE_APP_XXR}/posts`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -38,7 +38,7 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/posts/like/${post._id}`,
+        `${import.meta.env.VITE_APP_XXR}/like/${post._id}`,
         {
           method: "PATCH",
           headers: {
@@ -62,7 +62,7 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/users/${user._id}/${post.userId}`,
+        `${import.meta.env.VITE_APP_XXR}/users/${user._id}/${post.userId}`,
         {
           method: "PATCH",
           headers: {

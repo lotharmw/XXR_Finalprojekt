@@ -16,7 +16,7 @@ function MyEvent({ user, token }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/xplore/${user._id}/events`
+          `${import.meta.env.VITE_APP_XXR}/xplore/${user._id}/events`
         );
         if (!response.ok)
           throw new Error(

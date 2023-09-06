@@ -19,7 +19,7 @@ function MySets({ user }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/xperience/${user._id}/sets`
+          `${import.meta.env.VITE_APP_XXR}/xperience/${user._id}/sets`
         );
         if (!response.ok)
           throw new Error(

@@ -57,7 +57,7 @@ function Xplore({ theme, user, token }) {
     formData.append("userId", event.userId);
 
     try {
-      const response = await fetch("http://localhost:8000/xplore", {
+      const response = await fetch(`${import.meta.env.VITE_APP_XXR}/xplore`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
