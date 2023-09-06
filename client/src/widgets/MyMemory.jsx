@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useRef, useEffect, useState } from "react";
 import { AiOutlineUserAdd, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import defaultUser from "../assets/default-user.svg";
+import defaultUser from "../../public/img/default-user.svg";
 
 function MyMemory({ user }) {
   const likeRef = useRef();

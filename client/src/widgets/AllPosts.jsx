@@ -6,7 +6,7 @@ import {
   AiFillHeart,
   AiOutlineUserDelete,
 } from "react-icons/ai";
-import defaultUser from "../assets/default-user.svg";
+import defaultUser from "../../public/img/default-user.svg";
 
 function AllPosts({ token, user, allPosts, setAllPosts }) {
   const likeRef = useRef();

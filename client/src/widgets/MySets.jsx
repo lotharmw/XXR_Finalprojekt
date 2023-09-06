@@ -9,7 +9,7 @@ import {
 } from "react-icons/ai";
 import { BsSpotify } from "react-icons/bs";
 import { BiLogoSoundcloud } from "react-icons/bi";
-import defaultUser from "../assets/default-user.svg";
+import defaultUser from "../../public/img/default-user.svg";
 
 function MySets({ user }) {
   const likeRef = useRef();

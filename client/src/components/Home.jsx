@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
-import x from "../assets/x-letter.svg";
-import r from "../assets/r-letter.svg";
-import fish from "../assets/fish.svg";
-import snake from "../assets/snake.svg";
-import dragon from "../assets/dragon.svg";
+import x from "../../public/img/x-letter.svg";
+import r from "../../public/img/r-letter.svg";
+import fish from "../../public/img/fish.svg";
+import snake from "../../public/img/snake.svg";
+import dragon from "../../public/img/dragon.svg";
 
 function Home({ theme }) {
   return (
     <>
       {theme == "night" ? (
-        <div className="calc-screen bg-[url('src/assets/xxr-main.png')] bg-contain bg-no-repeat bg-center"></div>
+        <div className="calc-screen bg-[url('public/img/xxr-main.png')] bg-contain bg-no-repeat bg-center"></div>
       ) : (
-        <div className="calc-screen bg-[url('src/assets/xxr-whiteBg.png')] bg-contain bg-no-repeat bg-center"></div>
+        <div className="calc-screen bg-[url('public/img/xxr-whiteBg.png')] bg-contain bg-no-repeat bg-center"></div>
       )}
       <div className="min-h-screen grid grid-cols-[1fr,2fr] max-w-screen-xl mx-auto items-center">
         <img
