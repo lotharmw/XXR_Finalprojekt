@@ -27,7 +27,7 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
       }
     };
     fetchData();
-  }, [token]);
+  }, [setAllPosts, token]);
 
   const handleLike = async (e, post) => {
     e.preventDefault();
@@ -87,13 +87,19 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
             </div>
             <div className="card-body pt-0">
               <div className="flex flex-row items-center gap-2">
-                <button ref={likeRef} name={user._id}>
-                  {user._id in post.likes ? (
-                    <AiFillHeart onClick={(e) => handleLike(e, post)} />
-                  ) : (
-                    <AiOutlineHeart onClick={(e) => handleLike(e, post)} />
-                  )}
-                </button>
+                {token ? (
+                  <button ref={likeRef} name={user._id}>
+                    {user._id in post.likes ? (
+                      <AiFillHeart onClick={(e) => handleLike(e, post)} />
+                    ) : (
+                      <AiOutlineHeart onClick={(e) => handleLike(e, post)} />
+                    )}
+                  </button>
+                ) : (
+                  <button>
+                    <AiFillHeart />
+                  </button>
+                )}
                 <span>{Object.keys(post.likes).length}</span>
               </div>
             </div>

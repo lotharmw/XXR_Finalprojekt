@@ -3,10 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import SignUp from "./components/SignUp";
-import Home from "./components/Home";
+import Remember from "./components/Remember";
 import ProfilePage from "./components/ProfilePage";
-import XXRHome from "./components/XXRHome";
+import Home from "./components/Home";
 import Xplore from "./components/Xplore";
+import Xperience from "./components/Xperience";
 
 function App() {
   // THEME TOGGLE LIGHT/DARK MODE - START
@@ -149,34 +150,51 @@ function App() {
     <div className="bg-base-200 min-h-screen">
       <Header user={user} handleToggle={handleToggle} theme={theme} />
       <Routes>
-        {token ? (
-          <Route path="/" element={<Home user={user} token={token} />} />
-        ) : (
-          <Route
-            path="/"
-            element={
-              <SignUp
-                showRegister={showRegister}
-                setShowRegister={setShowRegister}
-                registerData={registerData}
-                loginData={loginData}
-                handleRegisterChange={handleRegisterChange}
-                handleLoginChange={handleLoginChange}
-                handleSubmit={handleSubmit}
-                file={file}
-                setFile={setFile}
-              />
-            }
-          />
-        )}
+        <Route
+          path="/"
+          element={<Home user={user} token={token} theme={theme} />}
+        />
+        <Route
+          path="/login"
+          element={
+            <SignUp
+              showRegister={showRegister}
+              setShowRegister={setShowRegister}
+              registerData={registerData}
+              loginData={loginData}
+              handleRegisterChange={handleRegisterChange}
+              handleLoginChange={handleLoginChange}
+              handleSubmit={handleSubmit}
+              file={file}
+              setFile={setFile}
+            />
+          }
+        />
         <Route
           path="/profile/:id"
           element={token ? <ProfilePage /> : <Navigate to="/" />}
         />
-        <Route path="/home" element={<XXRHome theme={theme} />} />
         <Route
           path="/xplore"
           element={<Xplore theme={theme} user={user} token={token} />}
+        />
+        <Route
+          path="/xperience"
+          element={<Xperience theme={theme} user={user} token={token} />}
+        />
+        <Route
+          path="/remember"
+          element={<Remember theme={theme} user={user} token={token} />}
+        />
+        <Route
+          path="/profile"
+          element={
+            token ? (
+              <ProfilePage theme={theme} user={user} token={token} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
       </Routes>
     </div>

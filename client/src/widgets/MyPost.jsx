@@ -10,7 +10,7 @@ function MyPost({ user, token }) {
   const [isImage, setIsImage] = useState(false);
   const [file, setFile] = useState();
   const [post, setPost] = useState({
-    userId: user._id,
+    userId: user ? user._id : "",
     description: "",
   });
   const [allPosts, setAllPosts] = useState([]);
@@ -57,73 +57,77 @@ function MyPost({ user, token }) {
 
   return (
     <>
-      <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-        <div className="card-body flex-row pb-4">
-          <div className="avatar">
-            <div className="w-12 h-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              {user.picturePath ? (
-                <img src={user.picturePath} />
-              ) : (
-                <img src={defaultUser} />
-              )}
-            </div>
-          </div>
-          <input
-            type="text"
-            placeholder="What's in your mind..."
-            name="description"
-            className="input input-bordered rounded-3xl w-full ml-4"
-            value={post.description}
-            onChange={handleDescriptionChange}
-          />
-        </div>
-        {isImage && (
-          <Dropzone
-            acceptedFiles=".jpg,.jpeg,.png"
-            multiple={false}
-            onDrop={(acceptedFiles) => {
-              setFile(acceptedFiles[0]);
-            }}
-          >
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                {!file ? (
-                  <div {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <div className="mx-8 p-4 border-dotted border-2 cursor-pointer">
-                      Drag &apos;n&apos; drop some files here, or click to
-                      select files
-                    </div>
-                  </div>
+      {token ? (
+        <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
+          <div className="card-body flex-row pb-4">
+            <div className="avatar">
+              <div className="w-12 h-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                {user ? (
+                  <img src={user.picturePath} />
                 ) : (
-                  <div className="mx-8 p-4 border-dotted border-2 flex flex-row justify-between items-center">
-                    <div>{file.path}</div>
-                    <CiCircleRemove
-                      className="cursor-pointer w-8 h-8"
-                      onClick={() => {
-                        setFile(false);
-                      }}
-                    />
-                  </div>
+                  <img src={defaultUser} />
                 )}
-              </section>
-            )}
-          </Dropzone>
-        )}
-        <div className="divider px-8 mt-0"></div>
-        <div className="flex px-8 pb-6 justify-between">
-          <div
-            className="flex flex-row items-center cursor-pointer"
-            onClick={() => setIsImage(!isImage)}
-          >
-            <BsImage />
-            <span className="pl-2">Image</span>
+              </div>
+            </div>
+            <input
+              type="text"
+              placeholder="What's in your mind..."
+              name="description"
+              className="input input-bordered rounded-3xl w-full ml-4"
+              value={post.description}
+              onChange={handleDescriptionChange}
+            />
           </div>
-          <button className="btn min-h-8" type="submit" onClick={handlePost}>
-            Post
-          </button>
+          {isImage && (
+            <Dropzone
+              acceptedFiles=".jpg,.jpeg,.png"
+              multiple={false}
+              onDrop={(acceptedFiles) => {
+                setFile(acceptedFiles[0]);
+              }}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <section>
+                  {!file ? (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <div className="mx-8 p-4 border-dotted border-2 cursor-pointer">
+                        Drag &apos;n&apos; drop some files here, or click to
+                        select files
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mx-8 p-4 border-dotted border-2 flex flex-row justify-between items-center">
+                      <div>{file.path}</div>
+                      <CiCircleRemove
+                        className="cursor-pointer w-8 h-8"
+                        onClick={() => {
+                          setFile(false);
+                        }}
+                      />
+                    </div>
+                  )}
+                </section>
+              )}
+            </Dropzone>
+          )}
+          <div className="divider px-8 mt-0"></div>
+          <div className="flex px-8 pb-6 justify-between">
+            <div
+              className="flex flex-row items-center cursor-pointer"
+              onClick={() => setIsImage(!isImage)}
+            >
+              <BsImage />
+              <span className="pl-2">Image</span>
+            </div>
+            <button className="btn min-h-8" type="submit" onClick={handlePost}>
+              Post
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
       <AllPosts
         token={token}
         user={user}

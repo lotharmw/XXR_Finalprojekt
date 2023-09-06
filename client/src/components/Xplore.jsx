@@ -90,7 +90,7 @@ function Xplore({ theme, user, token }) {
   const navigate = useNavigate();
 
   return (
-    <div className="calc-screen grid grid-cols-[1fr,4fr,1fr] max-w-screen-xl m-auto pt-16">
+    <div className="calc-screen grid grid-cols-[1fr,4fr,1fr] max-w-screen-xl m-auto py-16">
       <div>
         <span className="uppercase unbound-title text-8xl">
           X<br />p<br />
@@ -115,7 +115,7 @@ function Xplore({ theme, user, token }) {
       <div className="flex flex-col item-center gap-4">
         <h2 className="unbound-title text-4xl text-right">Create your Event</h2>
         <img
-          className={`w-1/4 mx-auto ${theme == "night" ? "invert-[1]" : ""}`}
+          className={`w-1/2 mx-auto ${theme == "night" ? "invert-[1]" : ""}`}
           src={snake}
           alt=""
         />
@@ -141,7 +141,9 @@ function Xplore({ theme, user, token }) {
         )}
         <dialog id="my_event" className="modal">
           <form method="dialog" className="modal-box max-w-[35rem]">
-            <button className="btn h-4 min-h-8 px-3 absolute right-6">X</button>
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
             <div className="py-4">
               <div className="form-control">
                 <label className="label">

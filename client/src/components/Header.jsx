@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import power from "../assets/power-button-svgrepo-com.svg";
 import logoBlack from "../assets/logo-black.png";
 import logoWhite from "../assets/logo-white.png";
@@ -39,13 +39,24 @@ function Header({ user, handleToggle, theme }) {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Homepage</a>
+              <NavLink to="/xplore" className="unbound-title">
+                Xplore
+              </NavLink>
             </li>
             <li>
-              <a>Portfolio</a>
+              <NavLink to="/xperience" className="unbound-title">
+                Xperience
+              </NavLink>
             </li>
             <li>
-              <a>About</a>
+              <NavLink to="/remember" className="unbound-title">
+                Remember
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile" className="unbound-title">
+                My Profile
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -53,14 +64,18 @@ function Header({ user, handleToggle, theme }) {
       <div className="navbar-center">
         <a className="btn btn-ghost normal-case text-xl">
           {theme == "night" ? (
-            <img className="w-24" src={logoWhite} alt="" />
+            <NavLink to="/">
+              <img className="w-24" src={logoWhite} alt="" />
+            </NavLink>
           ) : (
-            <img className="w-24" src={logoBlack} alt="" />
+            <NavLink to="/">
+              <img className="w-24" src={logoBlack} alt="" />
+            </NavLink>
           )}
         </a>
       </div>
       <div className="navbar-end">
-        {user && (
+        {user ? (
           <ul className="menu lg:menu-horizontal bg-base-200 rounded-box mr-4">
             <li>
               <details>
@@ -75,6 +90,10 @@ function Header({ user, handleToggle, theme }) {
               </details>
             </li>
           </ul>
+        ) : (
+          <button className="btn mr-4">
+            <NavLink to="login">Sign Up</NavLink>
+          </button>
         )}
         <label className="swap swap-rotate btn-ghost btn-circle">
           {/* this hidden checkbox controls the state */}

@@ -58,7 +58,7 @@ function Event({ user, token, allEvents, setAllEvents }) {
 
   return (
     <>
-      {publicEvents.map((event, index) => {
+      {publicEvents.toReversed().map((event, index) => {
         function getDayName(date = new Date(), locale = "de-DE") {
           return date.toLocaleDateString(locale, { weekday: "long" });
         }
@@ -74,12 +74,12 @@ function Event({ user, token, allEvents, setAllEvents }) {
         return (
           <div key={index} className="calc-w">
             <img
-              className="w-full min-h-4/5 cursor-pointer"
+              className="w-full min-h-4/5 cursor-pointer shadow-2xl"
               src={event.picturePath}
               alt="Shoes"
               onClick={() => window[index + 2].showModal()}
             />
-            <div className="h-1/5">
+            <div className="h-1/5 pt-4">
               <span className="teko-text">
                 {day}, {dayNumb} {month}
               </span>
@@ -120,8 +120,8 @@ function Event({ user, token, allEvents, setAllEvents }) {
             </div>
             <dialog id={index + 2} className="modal">
               <form method="dialog" className="modal-box max-w-[75vw]">
-                <button className="btn h-4 min-h-8 px-3 absolute right-6">
-                  X
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
                 </button>
                 <div className="flex flex-row">
                   <div className="max-h-[32rem]">
@@ -176,7 +176,11 @@ function Event({ user, token, allEvents, setAllEvents }) {
                         <BsCurrencyEuro className="w-5 h-5" />
                       </div>
                     </div>
-                    <p className="text-xl py-4">{event.description}</p>
+                    <span className="text-xl pb-4">
+                      LineUp: <strong>{event.lineUp}</strong>
+                    </span>
+                    {event.description}
+                    <p className="text-xl py-4"></p>
                     {token ? (
                       <div className="flex flex-row items-center mt-auto">
                         <button ref={likeRef} name={user._id} className="pr-1">
