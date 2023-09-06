@@ -11,6 +11,7 @@ import userRouter from "./routes/userRouter.js";
 import postRouter from "./routes/postRouter.js";
 import xploreRouter from "./routes/xploreRouter.js";
 import errorHandler from "./middleware/errorHandler.js";
+import setRouter from "./routes/setRouter.js";
 
 // CONFIGURATIONS
 const __filename = fileURLToPath(import.meta.url);
@@ -30,6 +31,7 @@ app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/xplore", xploreRouter);
+app.use("/xperience", setRouter);
 
 // ERROR HANDLER
 app.use(errorHandler);

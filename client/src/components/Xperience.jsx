@@ -51,13 +51,7 @@ function Xperience({ theme, user, token }) {
     formData.append("userId", user._id);
 
     try {
-      const response = await fetch("http://localhost:8000/xperience", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const response = await fetch("http://localhost:8000/xperience");
       if (!response.ok)
         throw new Error(`The fetch failed with a status of ${response.status}`);
       const responseData = await response.json();

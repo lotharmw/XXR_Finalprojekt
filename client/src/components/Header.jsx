@@ -53,11 +53,13 @@ function Header({ user, handleToggle, theme }) {
                 Remember
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/profile" className="unbound-title">
-                My Profile
-              </NavLink>
-            </li>
+            {user && (
+              <li>
+                <NavLink to="/profile" className="unbound-title">
+                  My Profile
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -91,7 +93,7 @@ function Header({ user, handleToggle, theme }) {
             </li>
           </ul>
         ) : (
-          <button className="btn mr-4">
+          <button className="btn btn-primary mr-4">
             <NavLink to="login">Sign Up</NavLink>
           </button>
         )}

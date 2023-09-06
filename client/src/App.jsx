@@ -188,13 +188,7 @@ function App() {
         />
         <Route
           path="/profile"
-          element={
-            token ? (
-              <ProfilePage theme={theme} user={user} token={token} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={<ProfilePage theme={theme} user={user} token={token} />}
         />
       </Routes>
     </div>

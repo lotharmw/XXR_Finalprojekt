@@ -16,7 +16,7 @@ xploreRouter
 
 // GET
 xploreRouter.route("/").get(getFeedEvent);
-xploreRouter.route("/:userId/evnts").get(getUserEvent);
+xploreRouter.route("/:userId/events").get(getUserEvent);
 
 // UPDATE
 xploreRouter.route("/like/:id").patch(verifyToken, likeEvent);

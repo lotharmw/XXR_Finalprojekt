@@ -16,11 +16,11 @@ export const getUserFriends = asyncHandler(async (req, res, next) => {
   const user = await User.findById(id);
 
   const friends = await Promise.all(
-    user.friends.map((id) => User.friends.findById(id))
+    user.friends.map((id) => User.findById(id))
   );
   const formattedFriends = friends.map(
     ({ _id, first_name, last_name, occupation, location, picturePath }) => {
-      _id, first_name, last_name, occupation, location, picturePath;
+      return { _id, first_name, last_name, occupation, location, picturePath };
     }
   );
   res.status(200).json(formattedFriends);
@@ -48,11 +48,11 @@ export const addRemoveFriends = asyncHandler(async (req, res, next) => {
   await user.save();
   await friend.save();
   const friends = await Promise.all(
-    user.friends.map((id) => User.friends.findById(id))
+    user.friends.map((id) => User.findById(id))
   );
   const formattedFriends = friends.map(
     ({ _id, first_name, last_name, occupation, location, picturePath }) => {
-      _id, first_name, last_name, occupation, location, picturePath;
+      return { _id, first_name, last_name, occupation, location, picturePath };
     }
   );
   res.status(200).json(formattedFriends);

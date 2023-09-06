@@ -6,7 +6,12 @@ import { MdAlternateEmail } from "react-icons/md";
 import MyEvent from "../widgets/MyEvent";
 import MySets from "../widgets/MySets";
 import MyMemory from "../widgets/MyMemory";
-function ProfilePage({ user, token, theme }) {
+function ProfilePage({ user, token }) {
+  if (user == null) {
+    user = localStorage.getItem("user");
+  }
+
+  console.log(user);
   return (
     <div className="grid grid-cols-[1fr,3fr] gap-4 max-w-screen-xl m-auto px-8 pt-4 calc-screen">
       <div className="pt-4">

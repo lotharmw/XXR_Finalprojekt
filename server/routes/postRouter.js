@@ -13,8 +13,8 @@ const postRouter = express.Router();
 postRouter.route("/").post(verifyToken, upload.single("picture"), createPost);
 
 // GET
-postRouter.route("/").get(verifyToken, getFeedPost);
-postRouter.route("/:userId/posts").get(verifyToken, getUserPost);
+postRouter.route("/").get(getFeedPost);
+postRouter.route("/:userId/posts").get(getUserPost);
 
 // UPDATE
 postRouter.route("/like/:id").patch(verifyToken, likePost);

@@ -1,6 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useRef, useEffect } from "react";
-import { AiOutlineUserAdd, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useRef, useEffect, useState } from "react";
+import {
+  AiOutlineUserAdd,
+  AiOutlineHeart,
+  AiFillHeart,
+  AiOutlineUserDelete,
+} from "react-icons/ai";
 import defaultUser from "../assets/default-user.svg";
 
 function AllPosts({ token, user, allPosts, setAllPosts }) {
@@ -52,10 +57,34 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
       console.log(error);
     }
   };
+  const [added, setAdded] = useState();
+  const handleAddFriend = async (e, post) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:8000/users/${user._id}/${post.userId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: likeRef.current.name }),
+        }
+      );
+      if (!response.ok)
+        throw new Error(`The fetch failed with a status of ${response.status}`);
+      const responseData = await response.json();
+      const data = responseData; // wich data?;
+      setAdded(data); //[use, setUse] = useState(wich start?)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
-      {allPosts.toReversed().map((post, index) => {
+      {allPosts?.toReversed().map((post, index) => {
         return (
           <div
             key={index}
@@ -77,7 +106,19 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
                   <span>{post.last_name}</span>
                 </div>
                 <button className="btn btn-ghost btn-circle">
-                  <AiOutlineUserAdd className="w-6 h-6" />
+                  {added?.some((user) => {
+                    return user._id === post.userId;
+                  }) ? (
+                    <AiOutlineUserDelete
+                      onClick={(e) => handleAddFriend(e, post)}
+                      className="w-6 h-6"
+                    />
+                  ) : (
+                    <AiOutlineUserAdd
+                      onClick={(e) => handleAddFriend(e, post)}
+                      className="w-6 h-6"
+                    />
+                  )}
                 </button>
               </div>
             </div>

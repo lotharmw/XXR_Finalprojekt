@@ -64,7 +64,7 @@ export const getFeedPost = asyncHandler(async (req, res, next) => {
 });
 
 export const getUserPost = asyncHandler(async (req, res, next) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
 
   const post = await Post.find({ userId });
 

@@ -79,13 +79,13 @@ export const getFeedEvent = asyncHandler(async (req, res, next) => {
 });
 
 export const getUserEvent = asyncHandler(async (req, res, next) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
 
-  const evnt = await Event.find({ userId });
+  const event = await Event.find({ userId });
 
-  res.status(200).json(evnt);
+  res.status(200).json(event);
 
-  if (!evnt) throw new ErrorResponse(`Can not find Posts of ${userId}`, 404);
+  if (!event) throw new ErrorResponse(`Can not find Posts of ${userId}`, 404);
   next();
 });
 

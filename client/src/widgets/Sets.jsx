@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import {
   AiOutlineUserAdd,
   AiOutlineHeart,
   AiFillHeart,
   AiFillYoutube,
+  AiOutlineUserDelete,
 } from "react-icons/ai";
 import { BsSpotify } from "react-icons/bs";
 import { BiLogoSoundcloud } from "react-icons/bi";
@@ -55,11 +56,34 @@ function Sets({ defaultUser, user, token, allSetPosts, setAllSetPosts }) {
 
   const likeRef = useRef();
 
-  //   console.log(allSetPosts);
+  const [added, setAdded] = useState();
+  const handleAddFriend = async (e, set) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:8000/users/${user._id}/${set.userId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: likeRef.current.name }),
+        }
+      );
+      if (!response.ok)
+        throw new Error(`The fetch failed with a status of ${response.status}`);
+      const responseData = await response.json();
+      const data = responseData; // wich data?;
+      setAdded(data); //[use, setUse] = useState(wich start?)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
-      {allSetPosts.toReversed().map((set, index) => {
+      {allSetPosts?.toReversed().map((set, index) => {
         const spotifyURL = set.spotify
           ? new URL(set.spotify).pathname.replace("/intl-de/", "/")
           : "";
@@ -88,7 +112,19 @@ function Sets({ defaultUser, user, token, allSetPosts, setAllSetPosts }) {
                   </span>
                 </div>
                 <button className="btn btn-ghost btn-circle">
-                  <AiOutlineUserAdd className="w-6 h-6" />
+                  {added?.some((user) => {
+                    return user._id === set.userId;
+                  }) ? (
+                    <AiOutlineUserDelete
+                      onClick={(e) => handleAddFriend(e, set)}
+                      className="w-6 h-6"
+                    />
+                  ) : (
+                    <AiOutlineUserAdd
+                      onClick={(e) => handleAddFriend(e, set)}
+                      className="w-6 h-6"
+                    />
+                  )}
                 </button>
               </div>
             </div>
