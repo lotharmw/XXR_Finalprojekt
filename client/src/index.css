@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: Teko;
+  src: url("../src/assets/Fonts/Teko-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Unbound;
+  src: url("../src/assets/Fonts/Unbounded-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Crisis;
+  src: url("../src/assets/Fonts/ClimateCrisis-Regular-VariableFont_YEAR.ttf");
+}
+
+.teko-text {
+  font-family: Teko;
+  padding-top: 2px;
+}
+
+.unbound-title {
+  font-family: Unbound;
+}
+
+.crisis-main_title {
+  font-family: Crisis;
+}
+
+.calc-screen {
+  min-height: calc(100vh - 68px);
+}
+
+.calc-w {
+  width: calc(33% - 8px);
+}
+.calc-w-50 {
+  width: calc(50% - 8px);
+}
