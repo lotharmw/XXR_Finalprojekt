@@ -29,7 +29,7 @@ function MyMemory({ user }) {
     <>
       <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 my-8">
         <div className="card-body flex-row  unbound-title text-2xl">
-          My Sets &#040;{allPosts && Object.keys(allPosts).length}&#041;
+          My Memories &#040;{allPosts && Object.keys(allPosts).length}&#041;
         </div>
       </div>
       <div className="flex flex-row flex-wrap gap-4 mt-8">
