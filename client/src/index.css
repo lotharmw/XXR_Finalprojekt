@@ -40,3 +40,10 @@
 .calc-w-50 {
   width: calc(50% - 8px);
 }
+
+.black {
+  background-image: url(../public/img/xxr-main.png);
+}
+.white {
+  background-image: url(../public/img/xxr-whiteBg.png);
+}
