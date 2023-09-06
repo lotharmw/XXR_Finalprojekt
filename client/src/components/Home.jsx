@@ -10,9 +10,9 @@ function Home({ theme }) {
   return (
     <>
       {theme == "night" ? (
-        <div className="calc-screen bg-[url('public/img/xxr-main.png')] bg-contain bg-no-repeat bg-center"></div>
+        <div className="calc-screen black bg-contain bg-no-repeat bg-center"></div>
       ) : (
-        <div className="calc-screen bg-[url('public/img/xxr-whiteBg.png')] bg-contain bg-no-repeat bg-center"></div>
+        <div className="calc-screen white bg-contain bg-no-repeat bg-center"></div>
       )}
       <div className="min-h-screen grid grid-cols-[1fr,2fr] max-w-screen-xl mx-auto items-center">
         <img
