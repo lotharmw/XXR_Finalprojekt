@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../middleware/authHandler.js";
+// import { verifyToken } from "../middleware/authHandler.js";
 import {
   createEvent,
   getFeedEvent,
@@ -10,15 +10,13 @@ import {
 
 const xploreRouter = express.Router();
 
-xploreRouter
-  .route("/")
-  .post(verifyToken, upload.single("picture"), createEvent);
+xploreRouter.route("/").post(upload.single("picture"), createEvent);
 
 // GET
 xploreRouter.route("/").get(getFeedEvent);
 xploreRouter.route("/:userId/events").get(getUserEvent);
 
 // UPDATE
-xploreRouter.route("/like/:id").patch(verifyToken, likeEvent);
+xploreRouter.route("/like/:id").patch(likeEvent);
 
 export default xploreRouter;

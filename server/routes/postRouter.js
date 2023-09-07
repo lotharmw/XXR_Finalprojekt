@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../middleware/authHandler.js";
+// import { verifyToken } from "../middleware/authHandler.js";
 import {
   createPost,
   getFeedPost,
@@ -10,13 +10,13 @@ import {
 
 const postRouter = express.Router();
 
-postRouter.route("/").post(verifyToken, upload.single("picture"), createPost);
+postRouter.route("/").post(upload.single("picture"), createPost);
 
 // GET
 postRouter.route("/").get(getFeedPost);
 postRouter.route("/:userId/posts").get(getUserPost);
 
 // UPDATE
-postRouter.route("/like/:id").patch(verifyToken, likePost);
+postRouter.route("/like/:id").patch(likePost);
 
 export default postRouter;

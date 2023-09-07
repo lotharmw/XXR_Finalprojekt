@@ -30,7 +30,7 @@ function Sets({ defaultUser, user, token, allSetPosts, setAllSetPosts }) {
       }
     };
     fetchData();
-  }, [setAllSetPosts]);
+  }, []);
 
   const handleLike = async (e, set) => {
     e.preventDefault();
