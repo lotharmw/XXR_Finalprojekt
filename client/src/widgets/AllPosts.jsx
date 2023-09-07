@@ -38,7 +38,7 @@ function AllPosts({ token, user, allPosts, setAllPosts }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_APP_XXR}/like/${post._id}`,
+        `${import.meta.env.VITE_APP_XXR}/posts/like/${post._id}`,
         {
           method: "PATCH",
           headers: {

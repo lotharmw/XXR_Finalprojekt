@@ -51,7 +51,16 @@ function Xperience({ theme, user, token }) {
     formData.append("userId", user._id);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_XXR}/xperience`);
+      const response = await fetch(
+        `${import.meta.env.VITE_APP_XXR}/xperience`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
       if (!response.ok)
         throw new Error(`The fetch failed with a status of ${response.status}`);
       const responseData = await response.json();
